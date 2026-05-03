@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I Love You In Every Universe 🌌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --deep-purple: #0d0520;
+      --mid-purple: #1a0a3d;
+      --rose: #ff6b9d;
+      --peach: #ffb347;
+      --gold: #f7c948;
+      --star: #e8d5ff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at center, #1a0a3d 0%, #0d0520 60%, #000008 100%);
+      font-family: 'Nunito', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      padding: 40px 20px;
+    }
+
+    /* ===== STARS ===== */
+    #starCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* ===== SHOOTING STARS ===== */
+    .shooting-star {
+      position: fixed;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, white, transparent);
+      border-radius: 50%;
+      opacity: 0;
+      animation: shoot linear infinite;
+      z-index: 1;
+      transform-origin: top;
+    }
+
+    @keyframes shoot {
+      0%   { transform: translateY(-100px) rotate(45deg); opacity: 0; }
+      5%   { opacity: 1; }
+      50%  { opacity: 0.5; }
+      100% { transform: translateY(120vh) rotate(45deg); opacity: 0; }
+    }
+
+    /* ===== CONTENT ===== */
+    .content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 700px;
+    }
+
+    /* Slow reveal stagger */
+    .fade-item {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1.2s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: none; }
+    }
+
+    .small-tag {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.2rem;
+      color: var(--peach);
+      letter-spacing: 2px;
+      animation-delay: 0.5s;
+    }
+
+    /* ===== UNIVERSE TEXT ===== */
+    .universe-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 10vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 24px 0;
+      letter-spacing: -1px;
+      animation-delay: 1s;
+    }
+
+    .universe-text .line1 { color: white; display: block; }
+    .universe-text .line2 { color: var(--rose); display: block; font-style: italic; }
+    .universe-text .line3 {
+      display: block;
+      background: linear-gradient(90deg, var(--peach), var(--gold), var(--rose), var(--star));
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite 3s;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+
+    /* ===== POEM BLOCK ===== */
+    .poem {
+      margin: 32px auto;
+      max-width: 480px;
+      padding: 28px 32px;
+      border: 1px solid rgba(255, 107, 157, 0.2);
+      border-radius: 20px;
+      background: rgba(255, 107, 157, 0.04);
+      backdrop-filter: blur(4px);
+      animation-delay: 2s;
+    }
+
+    .poem p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.05rem;
+      line-height: 2;
+    }
+
+    .poem p span {
+      color: var(--rose);
+    }
+
+    /* ===== SIGNATURE ===== */
+    .signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-top: 8px;
+      animation-delay: 3s;
+    }
+
+    /* ===== HEART BEAT ===== */
+    .big-heart {
+      font-size: 4rem;
+      display: block;
+      margin: 0 auto 20px;
+      animation: heartbeat 1.2s ease infinite 3.5s;
+      animation-delay: 3.5s;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14%  { transform: scale(1.15); }
+      28%  { transform: scale(1); }
+      42%  { transform: scale(1.1); }
+      70%  { transform: scale(1); }
+    }
+
+    /* ===== FLOATING PETALS ===== */
+    .petal {
+      position: fixed;
+      font-size: 1.4rem;
+      pointer-events: none;
+      animation: petalFall linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes petalFall {
+      0%   { transform: translateY(-5vh) rotate(0deg) translateX(0px); opacity: 0; }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(105vh) rotate(720deg) translateX(40px); opacity: 0; }
+    }
+
+    /* ===== RESTART BTN ===== */
+    .restart-btn {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 14px 36px;
+      border: 1px solid rgba(255,107,157,0.4);
+      color: rgba(255,255,255,0.5);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      animation-delay: 4s;
+    }
+
+    .restart-btn:hover {
+      border-color: var(--rose);
+      color: var(--rose);
+      background: rgba(255,107,157,0.08);
+    }
+
+    /* fireworks canvas */
+    #fireworkCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starCanvas"></canvas>
+<canvas id="fireworkCanvas"></canvas>
+
+<div class="content">
+  <p class="fade-item small-tag" style="animation-delay:0.4s">✨ in every galaxy, every timeline, every dream ✨</p>
+
+  <div class="universe-text fade-item" style="animation-delay:1s">
+    <span class="line1">I LOVE YOU</span>
+    <span class="line2">IN EVERY</span>
+    <span class="line3">UNIVERSE</span>
+  </div>
+
+  <div class="poem fade-item" style="animation-delay:2s">
+    <p>
+      In every version of this life<br/>
+      where the stars arrange themselves differently —<br/>
+      <span>I still find you.</span><br/>
+      In every universe where I get to choose,<br/>
+      <span>I still choose you.</span>
+    </p>
+  </div>
+
+  <span class="big-heart fade-item" style="animation-delay:3.2s">🫀</span>
+
+  <p class="signature fade-item" style="animation-delay:3.5s">— yours, in every universe 💛</p>
+
+  <a href="index.html" class="restart-btn fade-item" style="animation-delay:4s">← From the beginning 🌸</a>
+</div>
+
+<script>
+  // ===== STARS =====
+  const starCanvas = document.getElementById('starCanvas');
+  const sctx = starCanvas.getContext('2d');
+
+  function resizeStar() {
+    starCanvas.width = window.innerWidth;
+    starCanvas.height = window.innerHeight;
+  }
+  resizeStar();
+  window.addEventListener('resize', resizeStar);
+
+  const stars = [];
+  for (let i = 0; i < 220; i++) {
+    stars.push({
+      x: Math.random(),
+      y: Math.random(),
+      r: Math.random() * 1.5 + 0.3,
+      a: Math.random(),
+      speed: Math.random() * 0.008 + 0.002
+    });
+  }
+
+  function drawStars() {
+    sctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+    stars.forEach(s => {
+      s.a += s.speed;
+      const alpha = 0.4 + 0.5 * Math.sin(s.a);
+      sctx.beginPath();
+      sctx.arc(s.x * starCanvas.width, s.y * starCanvas.height, s.r, 0, Math.PI * 2);
+      sctx.fillStyle = `rgba(230, 210, 255, ${alpha})`;
+      sctx.fill();
+    });
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+
+  // ===== SHOOTING STARS =====
+  function addShootingStar() {
+    const el = document.createElement('div');
+    el.classList.add('shooting-star');
+    el.style.left = Math.random() * 80 + 'vw';
+    el.style.top = Math.random() * 30 + 'vh';
+    el.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+    el.style.animationDelay = '0s';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 4000);
+  }
+
+  setInterval(addShootingStar, 2000);
+
+  // ===== PETALS =====
+  const petalEmojis = ['🌸','🌺','💮','🌷','✨','💛','🌟'];
+  for (let i = 0; i < 14; i++) {
+    const p = document.createElement('span');
+    p.classList.add('petal');
+    p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+    p.style.animationDelay = (Math.random() * 8) + 's';
+    p.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
+    document.body.appendChild(p);
+  }
+
+  // ===== FIREWORKS =====
+  const fw = document.getElementById('fireworkCanvas');
+  const fctx = fw.getContext('2d');
+
+  fw.width = window.innerWidth;
+  fw.height = window.innerHeight;
+  window.addEventListener('resize', () => { fw.width = window.innerWidth; fw.height = window.innerHeight; });
+
+  const particles = [];
+  const colors = ['#ff6b9d','#ffb347','#f7c948','#e8d5ff','#ff6b6b','#fff'];
+
+  function launchFirework() {
+    const x = Math.random() * fw.width;
+    const y = Math.random() * fw.height * 0.5;
+    for (let i = 0; i < 60; i++) {
+      const angle = (Math.PI * 2 / 60) * i;
+      const speed = Math.random() * 3 + 1.5;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        alpha: 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        r: Math.random() * 3 + 1
+      });
+    }
+  }
+
+  function animateFireworks() {
+    fctx.clearRect(0, 0, fw.width, fw.height);
+    particles.forEach((p, i) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.05; // gravity
+      p.alpha -= 0.012;
+      fctx.beginPath();
+      fctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      fctx.fillStyle = p.color;
+      fctx.globalAlpha = Math.max(0, p.alpha);
+      fctx.fill();
+    });
+    fctx.globalAlpha = 1;
+    // Remove dead
+    for (let i = particles.length - 1; i >= 0; i--) {
+      if (particles[i].alpha <= 0) particles.splice(i, 1);
+    }
+    requestAnimationFrame(animateFireworks);
+  }
+  animateFireworks();
+
+  // Launch fireworks on load
+  setTimeout(() => {
+    launchFirework();
+    setTimeout(launchFirework, 500);
+    setTimeout(launchFirework, 1100);
+    setTimeout(launchFirework, 2000);
+    setTimeout(launchFirework, 3000);
+  }, 1500);
+
+  // Periodic fireworks
+  setInterval(launchFirework, 4000);
+
+  // Click to launch
+  document.body.addEventListener('click', (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    for (let i = 0; i < 50; i++) {
+      const angle = (Math.PI * 2 / 50) * i;
+      const speed = Math.random() * 3 + 1;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        alpha: 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        r: Math.random() * 2.5 + 1
+      });
+    }
+  });
+</script>
+</body>
+</html>

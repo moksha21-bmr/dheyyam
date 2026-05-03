@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A Year of You 💛</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600&family=Nunito:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #fff8f0;
+      --peach: #ffb347;
+      --rose: #ff6b6b;
+      --deep: #2d1b4e;
+      --gold: #f7c948;
+      --soft-pink: #ffd6e0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: linear-gradient(135deg, #fff1f8 0%, #fff8f0 50%, #f0f8ff 100%);
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.5rem;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .title-small {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      color: var(--rose);
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeDown 1s ease 0.3s forwards;
+    }
+
+    .title-main {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      color: var(--deep);
+      line-height: 1.1;
+      margin: 16px 0;
+      opacity: 0;
+      animation: fadeDown 1s ease 0.6s forwards;
+    }
+
+    .title-main span { color: var(--rose); font-style: italic; }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #7a6a7a;
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeDown 1s ease 0.9s forwards;
+    }
+
+    .scroll-hint {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      color: var(--peach);
+      animation: bounce 2s ease infinite 2s;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.5s forwards, bounce 2s ease infinite 2.5s;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 80px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      color: var(--peach);
+      text-align: center;
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+
+    /* ===== QUOTE CARDS ===== */
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .quote-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 8px 40px rgba(255,107,107,0.08);
+      border-left: 4px solid var(--rose);
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .quote-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 50px rgba(255,107,107,0.15);
+    }
+
+    .quote-card:nth-child(even) { border-left-color: var(--peach); }
+    .quote-card:nth-child(3n)   { border-left-color: var(--gold); }
+
+    .quote-mark {
+      font-size: 4rem;
+      color: var(--soft-pink);
+      font-family: 'Playfair Display', serif;
+      line-height: 0.5;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--deep);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .quote-author {
+      margin-top: 16px;
+      font-size: 0.82rem;
+      color: #aaa;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ===== PINTEREST IMAGES ===== */
+    .pinterest-section {
+      background: linear-gradient(135deg, #fff1f8, #fff8f0);
+      padding: 80px 20px;
+    }
+
+    .img-mosaic {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 16px;
+      max-width: 800px;
+      margin: 40px auto 0;
+    }
+
+    .img-mosaic .img-slot {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f0e6f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      position: relative;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+
+    .img-mosaic .img-slot:hover { transform: scale(1.03); }
+    .img-mosaic .img-slot:nth-child(1) { grid-column: span 2; min-height: 260px; }
+    .img-mosaic .img-slot:nth-child(4) { grid-column: span 2; min-height: 220px; }
+
+    .img-slot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .img-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #c9a0c9;
+      font-size: 0.82rem;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .img-placeholder .icon { font-size: 2.5rem; }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-top: 40px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--rose), var(--peach), var(--gold));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 36px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -26px;
+      top: 4px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--rose);
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--rose);
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot { background: var(--peach); box-shadow: 0 0 0 2px var(--peach); }
+
+    .timeline-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--deep);
+      margin-bottom: 6px;
+    }
+
+    .timeline-desc {
+      color: #7a6a7a;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ===== FUNNY SECTION ===== */
+    .funny-section {
+      padding: 80px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #f0f8ff, #fff1f8);
+    }
+
+    .funny-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--deep);
+      margin-bottom: 12px;
+    }
+
+    .funny-subtitle {
+      color: #7a6a7a;
+      margin-bottom: 40px;
+    }
+
+    /* ===== CTA BUTTON ===== */
+    .cta-btn {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 18px 48px;
+      background: linear-gradient(135deg, var(--rose), var(--peach));
+      color: white;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 40px rgba(255,107,107,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 1px;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 18px 50px rgba(255,107,107,0.45);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #bbb;
+      font-size: 0.85rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: 12px;
+      color: var(--soft-pink);
+      padding: 20px 0;
+    }
+
+    /* reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating hearts background -->
+<div class="floating-hearts" id="hearts"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="title-small">✨ A whole year of magic ✨</p>
+    <h1 class="title-main">To the girl who <span>changed everything</span></h1>
+    <p class="subtitle">
+      From B.Tech 3rd year to 4th year — through every moment, every panic before exams,
+      every random  conversation — you happened. And nothing has been the same since.
+    </p>
+    <div class="scroll-hint">↓ scroll to feel it ↓</div>
+    <a href="question.html" class="cta-btn">Enter the Surprise 💌</a>
+  </div>
+</section>
+
+<!-- ===== POETIC QUOTES ===== -->
+<section class="section reveal">
+  <p class="section-label">~ words that feel like you ~</p>
+  <h2 style="font-family:'Playfair Display',serif; font-size:2rem; color:var(--deep); text-align:center;">
+    Quotes that remind me of us
+  </h2>
+
+  <div class="quote-grid">
+    <div class="quote-card">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">Some people arrive and make such a beautiful impact on your life, you can barely remember what life was like without them.</p>
+      <p class="quote-author">— Nee Criminal</p>
+    </div>
+    <div class="quote-card">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">You were the kind of friend who made me feel like the best version of myself just by being around you.</p>
+      <p class="quote-author">— Nee Criminal</p>
+    </div>
+    <div class="quote-card">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">In a world full of temporary things, you are a perpetual feeling — warm, certain, and quietly extraordinary.</p>
+      <p class="quote-author">— Nee Criminal</p>
+    </div>
+    <div class="quote-card">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">You didn't just walk into my life — you rearranged the furniture, repainted the walls, and made it feel like home.</p>
+      <p class="quote-author">— Nee Criminal</p>
+    </div>
+    <div class="quote-card">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">Courage is not the absence of fear. It is having someone who believes in you enough that fear becomes irrelevant.</p>
+      <p class="quote-author">— Nee Criminal</p>
+    </div>
+    <div class="quote-card">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">One year. Three sixty five days. And somehow every single one of them felt better because you were in it.</p>
+      <p class="quote-author">— Nee Criminal</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider">♡ · · · ♡ · · · ♡</div>
+
+<!-- ===== PINTEREST IMAGES ===== -->
+<section class="pinterest-section reveal">
+  <div style="max-width:900px; margin:0 auto; text-align:center;">
+    <p class="section-label">~ moments & moods ~</p>
+    <h2 style="font-family:'Playfair Display',serif; font-size:2rem; color:var(--deep);">
+      Things that feel like this feeling
+    </h2>
+    <p style="color:#7a6a7a; margin-top:12px;">
+      How i have been seen you in my life...
+    </p>
+
+    <div class="img-mosaic">
+      <div class="img-slot">
+        <img src="assets/pinterest1.jpg" alt="vibe 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="img-placeholder" style="display:none"><span class="icon">🌸</span> pinterest1.jpg</div>
+      </div>
+      <div class="img-slot">
+        <img src="assets/pinterest2.jpg" alt="vibe 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="img-placeholder" style="display:none"><span class="icon">✨</span> pinterest2.jpg</div>
+      </div>
+      <div class="img-slot">
+        <img src="assets/pinterest3.jpg" alt="vibe 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="img-placeholder" style="display:none"><span class="icon">🌙</span> pinterest3.jpg</div>
+      </div>
+      <div class="img-slot">
+        <img src="assets/pinterest4.jpg" alt="vibe 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="img-placeholder" style="display:none"><span class="icon">💛</span> pinterest4.jpg</div>
+      </div>
+      <div class="img-slot">
+        <img src="assets/pinterest5.jpg" alt="vibe 5" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="img-placeholder" style="display:none"><span class="icon">🌺</span> pinterest5.jpg</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">♡ · · · ♡ · · · ♡</div>
+
+<!-- ===== YEAR TIMELINE ===== -->
+<section class="section reveal">
+  <p class="section-label">~ our story ~</p>
+  <h2 style="font-family:'Playfair Display',serif; font-size:2rem; color:var(--deep); text-align:center;">
+    How one year changed me
+  </h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-title">🌱 Before you — Me at B.Tech 3rd Year</p>
+      <p class="timeline-desc">Clueless, slightly lost, overthinking everything. Thought I had it figured out. Definitely did not have it figured out.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-title">☕ The First Conversations</p>
+      <p class="timeline-desc">Somehow we started talking. About class, about life, about nonsense. And I didn't want those conversations to end.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-title">💡 You Gave Me Courage</p>
+      <p class="timeline-desc">You believed in me before I believed in myself. That is rarer than people think. And I never forgot it.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-title">🔥 You Changed Me</p>
+      <p class="timeline-desc">Not dramatically. Not overnight. But quietly, steadily — the way sunrises work. I became someone I actually like, because of you.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-title">🎓 B.Tech 4th Year — Almost Over</p>
+      <p class="timeline-desc">The chapter is closing. Job search is splitting us. But some people you just don't forget. You're one of those people.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-title">💌 So I made this</p>
+      <p class="timeline-desc">Because I had to say it somehow. Because you deserve to know. Because the universe would never forgive me if I didn't try.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FUNNY CTA ===== -->
+<section class="funny-section reveal">
+  <p class="section-label">~ okay okay ~</p>
+  <h2 class="funny-title">Alright, I've been building up to something... 👀</h2>
+  <p class="funny-subtitle">No pressure. Totally calm. Absolutely not nervous at all. 😅</p>
+  <br/>
+  <a href="question.html" class="cta-btn">Ready? Click here 💌</a>
+</section>
+
+<footer>made with my vachi raani coding skills, for the one person who deserves it</footer>
+
+<script>
+  // Generate floating hearts
+  const heartsContainer = document.getElementById('hearts');
+  const emojis = ['💛','🌸','✨','💫','🌙','🤍','💕','🌺'];
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement('span');
+    h.classList.add('heart');
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
+    h.style.animationDuration = (Math.random() * 12 + 10) + 's';
+    h.style.animationDelay = (Math.random() * 10) + 's';
+    heartsContainer.appendChild(h);
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
